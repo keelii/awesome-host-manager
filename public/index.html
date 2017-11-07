@@ -9,6 +9,19 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <style>
+      ::-webkit-scrollbar {
+          width: 5px;
+      }
+      ::-webkit-scrollbar-thumb {
+          -webkit-border-radius: 6px;
+          border-radius: 6px;
+          background: #ccc;
+      }
+      ::-webkit-scrollbar-track {
+          -webkit-border-radius: 6px;
+          border-radius: 6px;
+          background-color: transparent;
+      }
       body .fa-lg {
         vertical-align: middle;
       }
@@ -62,6 +75,7 @@
       }
       body .menu-list a {
         border-radius: 0;
+        padding-right: 5px;
       }
       .menu-list input {
         width: 120px;
@@ -86,7 +100,7 @@
       .menu-list li .text {
         font-size: 14px;
         display: inline-block;
-        width: 120px;
+        width: 124px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
