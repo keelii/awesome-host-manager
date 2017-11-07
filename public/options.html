@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Awesome Hosts manager</title>
+    <link href="bulma.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <section class="hero is-medium is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Awesome Hosts manager <i class="fa fa-cogs" aria-hidden="true"></i>
+          </h1>
+          <h2 class="subtitle">
+            Can't easy more.
+          </h2>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <br><br>
+                <h3 class="subtitle is-3">Proxies when your host rules not matched</h3>
+                <div class="field has-addons">
+                  <div class="control is-expanded">
+                    <input id="o-proxy" class="input is-large" type="text" placeholder="SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080;">
+                    <p>
+                        <br>
+                        eg. <strong>SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; SYSTEM;</strong> or <strong>SYSTEM</strong> or <strong>DIRECT</strong>,
+                    </p>
+                  </div>
+                  <div class="control">
+                    <a class="button is-info is-large" id="save">Save</a>
+                  </div>
+                </div>
+                <br><br>
+                <h3 class="subtitle is-3">Delete all plugin data</h3>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-danger is-large" id="delete">DELETE ALL DATA</button>
+                    </div>
+                </div>
+                <br><br>
+                <h3 class="subtitle is-3">Source code</h3>
+                <a class="button" href="https://github.com/keelii/awesome-host-manager" target="_blank">
+                  <span class="icon">
+                    <i class="fa fa-github"></i>
+                  </span>
+                  <span>GitHub</span>
+                </a>
+                <div class="dropdown is-hoverable">
+                  <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                      <span>Support</span>
+                      <span class="icon is-small has-text-danger">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                    <div class="dropdown-content" style="width:600px;height:600px;">
+                      <img src="https://user-images.githubusercontent.com/458894/32358969-179e7a28-c085-11e7-882a-485164168f74.png" width="600" height="600" />
+                    </div>
+                  </div>
+                </div>
+                <div style="height:600px"></div>
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79264835-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-79264835-2');
+    </script>
+</body>
+</html>

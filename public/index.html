@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Awesome Hosts manager</title>
+    <link href="bulma.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+      body .fa-lg {
+        vertical-align: middle;
+      }
+      body .fa-pencil {
+        font-size: 12px;
+      }
+      body .disabled li:not(.all-hosts) .fa {
+        color: #b5b5b5;
+      }
+      body a:focus {
+        outline: none;
+      }
+      .control {
+        padding: .5em .75em;
+      }
+      #root {
+        width: 560px;
+      }
+      .hero.is-fullheight {
+          min-height: 90vh;
+      }
+      html {
+        overflow-y: hidden;
+        cursor: default;
+        -webkit-user-drag: none;
+      }
+      aside {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+      body textarea:focus, body input:focus {
+        outline: none;
+      }
+      .error-msg {
+        padding: 10px;
+      }
+      #textarea {
+        resize: none;
+        font-size: 14px;
+        border:none;
+        padding: 0 10px;
+        line-height: 20px;
+        width: 100%;
+      }
+      .main {
+        border-left: 2px solid #eee;
+      }
+      .cat-operate .fa {
+        font-size: 14px;
+      }
+      body .menu-list a {
+        border-radius: 0;
+      }
+      .menu-list input {
+        width: 120px;
+      }
+      .menu-list .nohover a:hover {
+        cursor: default;
+        color: #4a4a4a;
+        background: none;
+      }
+      .menu-list .nohover .fa {
+        cursor: pointer;
+      }
+      li.is-active {
+        background: #f5f5f5;
+      }
+      li.is-active a:hover {
+        background: #f5f5f5;
+      }
+      .menu-list li .text,.menu-list li .name-input {
+          margin-left: 5px;
+      }
+      .menu-list li .text {
+        font-size: 14px;
+        display: inline-block;
+        width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+      .host-operate {
+        margin-bottom: 0;
+        padding: .5em .75em
+      }
+      .level-left .fa {
+        <!-- margin-right: 5px; -->
+      }
+      #message {
+        /*margin: 0 10px 10px;*/
+      }
+      .all-hosts,.all-hosts a:hover {
+         background: #eee;
+      }
+      .all-hosts,.all-hosts .fa {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79264835-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-79264835-2');
+    </script>
+  </body>
+</html>
