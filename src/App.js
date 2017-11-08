@@ -205,7 +205,7 @@ class Message extends Component {
       >
         <div className="message-body">
           <Icon name={this.props.notice.type} color={'success'} />
-          {this.props.notice.content}
+          { ' ' + this.props.notice.content}
         </div>
       </article>
     )
@@ -455,7 +455,7 @@ class App extends Component {
     let content = ''
 
     hosts.forEach(h => {
-      if (cMap[h.cid]) {
+      if (cMap[h.cid] && cMap[h.cid].enabled) {
         content += `# ${cMap[h.cid].name}\n${h.content}\n`
       }
     })
@@ -532,7 +532,7 @@ class App extends Component {
     return error
   }
   copyHost() {
-    console.log(this.refs.hostContent.refs.textarea.value)
+    this.notice('info', 'Host content is copied.')
     this.copy(this.refs.hostContent.refs.textarea.value)
   }
   copy(text) {
@@ -559,7 +559,7 @@ class HostCtrl extends Component {
     return (
       <ul className="menu-list cat-operate">
         <li className="nohover">
-          <div className="is-clearfix control">
+          <div className="is-clearfix control" onDoubleClick={() => this.copy()}>
             <div
               className="is-pulled-left"
               onClick={() => {
@@ -582,7 +582,6 @@ class HostCtrl extends Component {
     this.props.onSave()
   }
   copy() {
-    console.log(123)
     this.props.onCopy()
   }
 }
