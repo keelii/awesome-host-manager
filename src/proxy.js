@@ -78,7 +78,6 @@ export function setProxy(content) {
   console.log('proxy to:\n' + pacContent)
   if (typeof chrome.proxy === 'undefined') return false
   if (result.hostContent !== '' || result.proxyContent !== '') {
-
     chrome.proxy.settings.set(
       {
         value: {

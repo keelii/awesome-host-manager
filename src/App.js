@@ -470,7 +470,7 @@ class App extends Component {
 
     hosts
       .filter(host => cMap[host.cid] && cMap[host.cid].enabled)
-      .forEach(host => (result += host.content))
+      .forEach(host => (result = host.content + '\n'))
 
     return result
   }

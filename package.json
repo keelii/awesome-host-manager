@@ -14,7 +14,7 @@
     "start": "react-scripts start",
     "clean": "rm -rf awesome-host-manager",
     "build": "yarn run clean && react-scripts build && yarn run rename",
-    "rename": "mv build/static/js/main.*.js build/static/js/main.js && mv build/static/js/main.*.js.map build/static/js/main.js.map && mv build awesome-host-manager",
+    "rename": "mv build awesome-host-manager",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
