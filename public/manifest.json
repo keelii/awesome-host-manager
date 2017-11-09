@@ -3,7 +3,7 @@
   "name": "Awesome Host Manager",
   "description": "Yet another Host tools.",
   "minimum_chrome_version": "24",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "icons": {
     "16"  : "images/logo-16.png",
     "48"  : "images/logo-48.png",

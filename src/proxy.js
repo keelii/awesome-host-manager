@@ -8,35 +8,50 @@ export const isDomain = name =>
   )
 export const isProxy = proxy => /^SOCKS/.test(proxy)
 export const removeComment = str => str.replace(/#.+/gm, '')
-export const getPort = address => address.slice(address.indexOf(':') + 1)
 
-export const parseRules = content => {
-  const lines = removeComment(content)
-    .split('\n')
+export const splitLines = (content) => {
+  return removeComment(content).split('\n')
     .filter(line => line.trim() !== '')
     .map(line => line.trim().split(/\s/))
-
-  const hosts = lines.filter(host =>
+    .map(hosts => {
+      return hosts.filter(host => {
+        return host.trim() !== ''
+      })
+    })
+}
+export const getHosts = (lines) => {
+  return lines.filter(host =>
     isIP(
       host[0].indexOf(':') > 0
         ? host[0].substr(0, host[0].indexOf(':'))
         : host[0]
     )
   )
-  const proxies = lines.filter(proxy => isProxy(proxy[0]))
+}
+export const getAddress = (add) => {
+  return add.indexOf(':') > -1 ? add : add + ':80'
+}
+export const getProxies = (lines) => {
+  return lines.filter(proxy => isProxy(proxy[0]))
+}
 
-  const getHost = arr => {
+export const parseRules = content => {
+  const lines = splitLines(content)
+
+  const hosts = getHosts(lines)
+  const proxies = getProxies(lines)
+
+  const getHostContent = arr => {
     let hosts = arr.slice()
-    let address = hosts.shift()
-    let port = address.indexOf(':') > 0 ? getPort(address) : 80
+    let address = getAddress(hosts.shift())
     let result = ''
 
     hosts.forEach(host => {
-      result += `}else if(host == "${host}"){return "PROXY ${address}:${port}; SYSTEM";\n`
+      result += `}else if(host == "${host}"){return "PROXY ${address}; SYSTEM";\n`
     })
     return result
   }
-  const getProxy = arr => {
+  const getProxyContent = arr => {
     let method = arr.slice()
     let address = method.shift()
     let result = ''
@@ -47,9 +62,9 @@ export const parseRules = content => {
     return result
   }
 
-  let hostContent = hosts.reduce((sum, value) => (sum += getHost(value)), '')
+  let hostContent = hosts.reduce((sum, value) => (sum += getHostContent(value)), '')
   let proxyContent = proxies.reduce(
-    (sum, value) => (sum += getProxy(value)),
+    (sum, value) => (sum += getProxyContent(value)),
     ''
   )
 
@@ -58,6 +73,7 @@ export const parseRules = content => {
 
 export function setProxy(content) {
   let code = '\n'
+  console.log(content)
   const result = parseRules(content)
   const defaultMethod =
     localStorage.getItem('AWESOME_HOST_otherProxies') || 'SYSTEM'

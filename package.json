@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rm -rf awesome-host-manager",
-    "build": "yarn run clean && react-scripts build && yarn run rename",
+    "build": "yarn test && yarn run clean && react-scripts build && yarn run rename",
     "rename": "mv build awesome-host-manager",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

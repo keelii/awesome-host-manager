@@ -76,6 +76,7 @@ class Item extends Component {
                 ref={`input_${this.props.id}`}
                 type="text"
                 value={this.props.name}
+                onBlur={() => {this.handleBlur()}}
                 onClick={e => {
                   e.stopPropagation()
                 }}
@@ -98,6 +99,14 @@ class Item extends Component {
   }
   handleLoad(id) {
     this.props.onLoadHost(id)
+  }
+  handleBlur(id) {
+    this.setState(
+      {
+        ...this.state,
+        editing: false
+      }
+    )
   }
   handleKeyPress(event) {
     if (event.key === 'Enter' || event.key === 'Escape') {
