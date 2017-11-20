@@ -16,10 +16,11 @@
   },
   "options_page": "options.html",
   "permissions": [
-      "proxy",
-      "storage",
-      "http://*/*",
-      "https://*/*",
-      "<all_urls>"
-    ]
+    "proxy",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "storage"
+  ]
 }

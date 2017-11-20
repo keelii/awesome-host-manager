@@ -1,3 +1,4 @@
+/*global chrome*/
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
@@ -24,6 +25,8 @@ import {
   isProxy,
   removeComment
 } from './proxy'
+
+let DB = {}
 
 class Icon extends Component {
   static defaultProps = {
@@ -57,7 +60,7 @@ class Item extends Component {
       >
         <a className="is-clearfix">
           <div className="is-pulled-left">
-            <span onClick={id => this.handleToggle(this.props.id)}>
+            <span onClick={(e, id) => this.handleToggle(e, this.props.id)}>
               <Icon
                 size="fa-lg"
                 name={this.props.enabled ? 'toggle-on' : 'toggle-off'}
@@ -132,8 +135,9 @@ class Item extends Component {
     this.props.onEdit(id, name)
     event.stopPropagation()
   }
-  handleToggle(id) {
+  handleToggle(e, id) {
     this.props.onToggle(id)
+    e.stopPropagation()
   }
 }
 
@@ -202,7 +206,6 @@ class AllHosts extends Component {
     this.props.onLoadAllHosts()
   }
 }
-
 class Message extends Component {
   render() {
     return (
@@ -220,7 +223,6 @@ class Message extends Component {
     )
   }
 }
-
 class ShowHost extends Component {
   render() {
     return (
@@ -431,6 +433,7 @@ class App extends Component {
   }
   toggleEnable(id) {
     this.props.dispatch(toggleEnableCategory(id))
+    this.setCurrentContent(this.props.selected)
     this.updateProxy()
   }
   editCategory(id, name) {
@@ -483,15 +486,17 @@ class App extends Component {
 
     return result
   }
-  handleLoadHost(id) {
+  setCurrentContent(id) {
+    this.props.dispatch(updateContent(this.getHostContentById(id)))
+  }
+  getHostContentById(id) {
     const hosts = this.props.hosts.filter(host => host.cid === id)
-    const content = hosts.length > 0 ? hosts[0].content : ''
-
+    return hosts.length > 0 ? hosts[0].content : ''
+  }
+  handleLoadHost(id) {
     this.props.dispatch(markSelected(id))
-    this.props.dispatch(updateContent(content))
-
+    this.setCurrentContent(id)
     this.saveData('selected', id)
-
     this.focusTextarea()
   }
   focusTextarea() {
@@ -578,9 +583,21 @@ class HostCtrl extends Component {
               <Icon name="save" />
             </div>
             <div className="is-pulled-right">
-              <a href="options.html" target="_blank" style={{ padding: 0 }}>
-                <Icon name="cog" />
-              </a>
+              <div className="dropdown is-hoverable is-right">
+                <div className="dropdown-trigger">
+                  <a href="options.html" target="_blank" style={{ padding: 0 }}>
+                    <Icon name="cog" />
+                  </a>
+                </div>
+                {/*<div className="dropdown-menu" id="dropdown-menu4" role="menu">*/}
+                  {/*<div className="dropdown-content">*/}
+                    {/*<div className="dropdown-item">*/}
+                      {/*<div className="button is-small">import</div>*/}
+                      {/*<div className="button is-small">export</div>*/}
+                    {/*</div>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
+              </div>
             </div>
           </div>
         </li>

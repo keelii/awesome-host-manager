@@ -2,7 +2,7 @@
 awesome-host-manager
 *.zip
 *.pem
-build
+.idea
 # dependencies
 /node_modules
 
