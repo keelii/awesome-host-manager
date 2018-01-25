@@ -94,27 +94,32 @@ export function setProxy(content) {
   console.log('proxy to:\n' + pacContent)
   if (typeof chrome.proxy === 'undefined') return false
   if (result.hostContent !== '' || result.proxyContent !== '') {
-    chrome.proxy.settings.set(
-      {
-        value: {
-          mode: 'pac_script',
-          pacScript: {
-            data: pacContent
-          }
+    clearProxy(function() {
+      chrome.proxy.settings.set(
+        {
+          value: {
+            mode: 'pac_script',
+            pacScript: {
+              data: pacContent
+            }
+          },
+          scope: 'regular'
         },
-        scope: 'regular'
-      },
-      function() {}
-    )
+        function() {}
+      )
+    })
   } else {
     clearProxy()
   }
 }
-export function clearProxy() {
-  console.log('clean.')
+export function clearProxy(cb) {
+  cb = cb || function () {}
+  console.log('clear.')
   if (typeof chrome.proxy === 'undefined') return false
   chrome.proxy.settings.set({
-    value: { mode: 'system' },
-    scope: 'regular'
-  })
+      value: { mode: 'system' },
+      scope: 'regular'
+    },
+    cb
+  )
 }
