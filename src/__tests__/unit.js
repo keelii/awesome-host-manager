@@ -1,6 +1,7 @@
 import {
   isIP,
   isDomain,
+  isLocalHost,
   getAddress,
   removeComment,
   splitLines,
@@ -27,6 +28,11 @@ it('should a domain name', () => {
   expect(isDomain('jd-dj.local')).toEqual(true)
   expect(isDomain('jd.dj.im')).toEqual(true)
   expect(isDomain('jd.12.dj.im')).toEqual(true)
+})
+it('should a local host name', () => {
+  expect(isLocalHost('test')).toEqual(true)
+  expect(isLocalHost('test123')).toEqual(true)
+  expect(isLocalHost('local')).toEqual(true)
 })
 it('should a IP/Port address', () => {
   expect(getAddress('192.168.1.1:8088')).toEqual('192.168.1.1:8088')

@@ -6,6 +6,7 @@ export const isDomain = name =>
   /^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,6})$/.test(
     name
   )
+export const isLocalHost = name => /\w+/.test(name)  
 export const isProxy = proxy => /^SOCKS/.test(proxy)
 export const removeComment = str => str.replace(/#.+/gm, '')
 
@@ -47,7 +48,7 @@ export const parseRules = content => {
     let result = ''
 
     hosts.forEach(host => {
-      result += `}else if(host == "${host}"){return "PROXY ${address}; SYSTEM";\n`
+      result += `\nif(host == "${host}"){\nreturn "PROXY ${address}; SYSTEM";}\n`
     })
     return result
   }
@@ -78,18 +79,37 @@ export function setProxy(content) {
   const defaultMethod =
     localStorage.getItem('AWESOME_HOST_otherProxies') || 'SYSTEM'
 
-  let pacContent = `function FindProxyForURL(url, host) {
-        if (shExpMatch(url, "http:*") || shExpMatch(url, "https:*")) {
-            if (isPlainHostName(host)) {
+  let pacContent = `
+  function FindProxyForURL(url, host) {
+    if (shExpMatch(url, "http:*") || shExpMatch(url, "https:*")) {
+        if (isPlainHostName(host)) {
+            if (host == 'localhost') {
                 return "DIRECT";
-            ${result.hostContent}
             } else {
-                return "${result.proxyContent} ${defaultMethod}";
+                ${result.hostContent}
+                else { return "${result.proxyContent} ${defaultMethod}"; }
             }
         } else {
-            return "SYSTEM";
+            ${result.hostContent}
+            else { return "${result.proxyContent} ${defaultMethod}"; }
         }
-    }`
+    } else {
+        return "SYSTEM";
+    }
+  }`
+  // let pacContent = `function FindProxyForURL(url, host) {
+  //       if (shExpMatch(url, "http:*") || shExpMatch(url, "https:*")) {
+  //           if (isPlainHostName(host) && host == 'localhost') {
+  //               return "DIRECT";
+  //           ${result.hostContent}
+  //           } else {
+  //               return "${result.proxyContent} ${defaultMethod}";
+  //           }
+  //       } else {
+  //           return "SYSTEM";
+  //       }
+  //   }`
+
 
   console.log('proxy to:\n' + pacContent)
   if (typeof chrome.proxy === 'undefined') return false

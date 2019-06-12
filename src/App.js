@@ -22,6 +22,7 @@ import {
   clearProxy,
   isIP,
   isDomain,
+  isLocalHost,
   isProxy,
   removeComment
 } from './proxy'
@@ -537,7 +538,8 @@ class App extends Component {
       r.shift()
       if (r.length) {
         r.filter(h => h.trim() !== '').forEach(h => {
-          if (!isDomain(h)) {
+          let isValidHost = isDomain(h) || isLocalHost(h)
+          if (!isValidHost) {
             error = `host name[${r}] maybe not valid.`
           }
         })
