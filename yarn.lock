@@ -7250,9 +7250,9 @@ upper-case@^1.1.1:
   integrity sha1-9rRQHC7EzdJrp4vnIilh3ndiFZg=
 
 urijs@^1.16.1:
-  version "1.19.0"
-  resolved "http://registry.npm.taobao.org/urijs/download/urijs-1.19.0.tgz#d8aa284d0e7469703a6988ad045c4cbfdf08ada0"
-  integrity sha1-2KooTQ50aXA6aYitBFxMv98IraA=
+  version "1.19.7"
+  resolved "https://registry.yarnpkg.com/urijs/-/urijs-1.19.7.tgz#4f594e59113928fea63c00ce688fb395b1168ab9"
+  integrity sha512-Id+IKjdU0Hx+7Zx717jwLPsPeUqz7rAtuVBRLLs+qn+J2nf9NGITWVCxcijgYxBqe83C7sqsQPs6H1pyz3x9gA==
 
 url-loader@0.5.9:
   version "0.5.9"
