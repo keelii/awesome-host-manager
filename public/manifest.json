@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Awesome Host Manager",
   "description": "Yet another Host tools.",
-  "minimum_chrome_version": "24",
-  "version": "1.0.15",
+  "minimum_chrome_version": "88",
+  "version": "1.0.16",
   "icons": {
     "16"  : "images/logo-16.png",
     "48"  : "images/logo-48.png",
@@ -20,7 +20,6 @@
     "storage",
     "http://*/*",
     "https://*/*",
-    "<all_urls>",
-    "storage"
+    "<all_urls>"
   ]
 }
