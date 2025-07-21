@@ -1,21 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { h, render } from './vendor/preact.js';
+import htm from './vendor/htm.js';
+import App from './App.js';
 
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+const html = htm.bind(h);
 
-import App from './App'
-import hostApp from './reducers'
-
-import registerServiceWorker from './registerServiceWorker'
-
-let store = createStore(hostApp)
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-
-registerServiceWorker()
+render(h(App, null), document.getElementById('root'));

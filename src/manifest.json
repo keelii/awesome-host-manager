@@ -2,24 +2,18 @@
   "manifest_version": 3,
   "name": "Awesome Host Manager",
   "description": "Yet another Host tools.",
-  "minimum_chrome_version": "88",
   "version": "1.0.16",
   "icons": {
-    "16"  : "images/logo-16.png",
-    "48"  : "images/logo-48.png",
-    "128" : "images/logo-128.png"
+    "16": "images/logo-16.png",
+    "48": "images/logo-48.png",
+    "128": "images/logo-128.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": "images/logo-16.png",
     "default_title": "Awesome Host Manager",
     "default_popup": "index.html"
   },
   "options_page": "options.html",
-  "permissions": [
-    "proxy",
-    "storage",
-    "http://*/*",
-    "https://*/*",
-    "<all_urls>"
-  ]
+  "permissions": ["proxy", "storage", "scripting", "activeTab"],
+  "host_permissions": ["http://*/*", "https://*/*", "<all_urls>"]
 }
