@@ -3,151 +3,92 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Awesome Hosts manager</title>
-    <link href="bulma.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="./style.css" />
     <style>
-      ::-webkit-scrollbar {
-          width: 5px;
-      }
-      ::-webkit-scrollbar-thumb {
-          -webkit-border-radius: 6px;
-          border-radius: 6px;
-          background: #ccc;
-      }
-      ::-webkit-scrollbar-track {
-          -webkit-border-radius: 6px;
-          border-radius: 6px;
-          background-color: transparent;
-      }
-      body .fa-lg {
-        vertical-align: middle;
-      }
-      body .fa-pencil {
-        font-size: 12px;
-      }
-      body .disabled li:not(.all-hosts) .fa {
-        color: #b5b5b5;
-      }
-      body a:focus {
-        outline: none;
-      }
-      .control {
-        padding: .5em .75em;
-      }
-      #root {
-        width: 560px;
-      }
-      .hero.is-fullheight {
-          min-height: 90vh;
-      }
-      html {
-        overflow-y: hidden;
-        cursor: default;
-        -webkit-user-drag: none;
-      }
-      aside {
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-      }
-      body textarea:focus, body input:focus {
-        outline: none;
-      }
-      .error-msg {
-        padding: 10px;
-      }
-      #textarea {
-        resize: none;
-        font-size: 14px;
-        border:none;
-        padding: 0 10px;
-        line-height: 20px;
-        width: 100%;
-      }
-      .main {
-        border-left: 2px solid #eee;
-      }
-      .cat-operate .fa {
-        font-size: 14px;
-      }
-      body .menu-list a {
-        border-radius: 0;
-        padding-right: 5px;
-      }
-      body .menu-list a:hover {
-        background-color: transparent;
-      }
-      .menu-list .is-pulled-right .icon {
-        visibility: hidden;
-      }
-      .menu-list li:hover .icon {
-        visibility: visible;
-      }
-      .menu-list input {
-        width: 120px;
-      }
-      .menu-list .nohover a:hover {
-        cursor: default;
-        color: #4a4a4a;
-        background: none;
-      }
-      .menu-list .nohover .fa {
-        cursor: pointer;
-      }
-      li.is-active {
-        background: #f5f5f5;
-      }
-      li.is-active a {
-        color: #000;
-      }
-      li.is-active a:hover {
-        background: #f5f5f5;
-        color: #000;
-      }
-      .menu-list li .text,.menu-list li .name-input {
-          margin-left: 5px;
-      }
-      .menu-list li .text {
-        font-size: 14px;
-        display: inline-block;
-        width: 124px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        vertical-align: middle;
-      }
-      .host-operate {
-        margin-bottom: 0;
-        padding: .5em .75em
-      }
-      .level-left .fa {
-        <!-- margin-right: 5px; -->
-      }
-      #message {
-        /*margin: 0 10px 10px;*/
-      }
-      .all-hosts,.all-hosts a:hover {
-         background: #eee;
-      }
-      .all-hosts,.all-hosts .fa {
-        font-weight: bold;
-      }
+        .toastify {
+            padding: 12px 20px;
+            color: #ffffff;
+            display: inline-block;
+            box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(77, 96, 232, 0.3);
+            background: -webkit-linear-gradient(315deg, var(--primary-color-80), var(--primary-color));
+            background: linear-gradient(135deg, var(--primary-color-80), var(--primary-color));
+            position: fixed;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            border-radius: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            max-width: calc(50% - 20px);
+            z-index: 2147483647;
+        }
+
+        .toastify.on {
+            opacity: 1;
+        }
+
+        .toast-close {
+            background: transparent;
+            border: 0;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1em;
+            opacity: 0.4;
+            padding: 0 5px;
+        }
+
+        .toastify-right {
+            right: 15px;
+        }
+
+        .toastify-left {
+            left: 15px;
+        }
+
+        .toastify-top {
+            top: -150px;
+        }
+
+        .toastify-bottom {
+            bottom: -150px;
+        }
+
+        .toastify-rounded {
+            border-radius: 25px;
+        }
+
+        .toastify-avatar {
+            width: 1.5em;
+            height: 1.5em;
+            margin: -7px 5px;
+            border-radius: 2px;
+        }
+
+        .toastify-center {
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            max-width: fit-content;
+            max-width: -moz-fit-content;
+        }
+
+        @media only screen and (max-width: 360px) {
+            .toastify-right, .toastify-left {
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                max-width: fit-content;
+            }
+        }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79264835-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-79264835-2');
-    </script> -->
+    <script src="toastify.js"></script>
+    <script src="dist/bundle.js"></script>
   </body>
 </html>

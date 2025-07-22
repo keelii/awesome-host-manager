@@ -7,7 +7,7 @@
     if (proxy) content.value = proxy
 
     saveBtn.onclick = function () {
-        var proxy = content.value || 'SYSTEM'
+        var proxy = content.value || 'DIRECT'
         localStorage.setItem('AWESOME_HOST_otherProxies', proxy)
     }
     deleteBtn.onclick = function () {

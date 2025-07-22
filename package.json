@@ -4,18 +4,14 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
-    "react-scripts": "1.0.14",
-    "redux": "^3.7.2"
+    "preact": "^10.26.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "clean": "rm -rf awesome-host-manager",
-    "build": "yarn test && yarn run clean && react-scripts build && yarn run rename",
-    "rename": "mv build awesome-host-manager",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "esbuild src/index.tsx --bundle --format=esm --outfile=public/dist/bundle.js --watch",
+    "build": "esbuild src/index.tsx --bundle --outfile=public/dist/bundle.js --minify --sourcemap"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.8",
+    "typescript": "^5.8.3"
   }
 }

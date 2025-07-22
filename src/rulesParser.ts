@@ -1,3 +1,4 @@
+// @ts-nocheck
 const isIP = address =>
   /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/.test(address)
 const isProxy = proxy => /^SOCKS/.test(proxy)

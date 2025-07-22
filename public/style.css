@@ -1,0 +1,111 @@
+:root {
+    --left-width: 200px;
+    --op-height: 40px;
+    --border-x: 0px;
+    --border-y: 2px;
+    --primary-color-80: rgba(33, 203, 84, 0.8);
+    --primary-color: #21cb54;
+    --active-background: rgba(0, 0, 0, 0.05);
+    --max-width: 600px;
+}
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.flex {
+    display: flex;
+}
+.left {
+    width: var(--left-width);
+    border-right: var(--border-y) solid var(--active-background);
+}
+.right {
+    flex-grow: 1;
+}
+.salign {
+    display: flex;
+    justify-content: space-between;
+}
+.valign {
+    display: flex;
+    align-items: center;
+}
+.gap-5 { gap: 5px; }
+.gap-10 { gap: 10px; }
+.grow-1 {
+    flex-grow: 1;
+}
+.app {
+    overflow: hidden;
+    width: var(--max-width);
+    min-height: calc(var(--max-width) * 0.618);
+}
+.op {
+    height: calc(var(--op-height) - var(--border-x));
+    line-height: calc(var(--op-height) - var(--border-x));
+    border-bottom: var(--border-x) solid var(--active-background);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.cnt {
+    height: calc(100vh - var(--op-height));
+}
+.menu-list {
+    height: 100%;
+    user-select: none;
+    overflow-y: auto;
+}
+.menu-list li {
+    padding: 10px 10px;
+}
+.menu-list .disabled,
+.disabled .icon {
+    color: #999
+}
+.menu-list li [data-name="edit"] {
+    display: none;
+}
+.menu-list li:hover [data-name="edit"] {
+    display: inline-flex;
+}
+.menu-list .is-active {
+    background-color: var(--active-background);
+}
+.is-hidden {
+    display: none;
+}
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+textarea {
+    resize: none;
+    border: none;
+    padding: 10px;
+    /*outline: 1px solid red;*/
+    outline: none;
+    width: 100%;
+    height: calc(100vh - var(--op-height));
+    overflow-y: auto;
+    font-size: 14px;
+}
+.update-input {
+    font-size: inherit;
+    width: 120px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    /*padding: 2px 4px;*/
+    background: transparent;
+}
+.update-input:focus-visible {
+    /*outline: none;*/
+}
