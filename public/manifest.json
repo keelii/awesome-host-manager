@@ -14,7 +14,6 @@
     "128": "images/logo.png"
   },
   "permissions": [
-    "storage",
     "proxy"
   ],
   "host_permissions": [
