@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*global chrome*/
 export const isIP = address =>
   /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/.test(address)
@@ -38,20 +39,31 @@ export const getProxies = (lines) => {
 
 export const parseRules = content => {
   const lines = splitLines(content)
-
   const hosts = getHosts(lines)
   const proxies = getProxies(lines)
 
-  const getHostContent = arr => {
-    let hosts = arr.slice()
-    let address = getAddress(hosts.shift())
-    let result = ''
+  // console.log({lines, hosts, proxies})
 
+  let results = []
+  hosts.forEach(([ip, ...hosts]) => {
     hosts.forEach(host => {
-      result += `\nif(host == "${host}"){\nreturn "PROXY ${address}; SYSTEM";}\n`
+      results.push([host, ip])
     })
-    return result
-  }
+  })
+  const hostContent = results.map(([host, address]) => {
+    return `      if (host == "${host}") return "PROXY ${address}; DIRECT";`
+  }).join('\n')
+
+  // const getHostContent = arr => {
+  //   let hosts = arr.slice()
+  //   let address = getAddress(hosts.shift())
+  //   let result = []
+  //
+  //   hosts.forEach(host => {
+  //     result.push(`if(host == "${host}"){ return "PROXY ${address}; SYSTEM"; }`)
+  //   })
+  //   return result.join('\n')
+  // }
   const getProxyContent = arr => {
     let method = arr.slice()
     let address = method.shift()
@@ -63,7 +75,6 @@ export const parseRules = content => {
     return result
   }
 
-  let hostContent = hosts.reduce((sum, value) => (sum += getHostContent(value)), '')
   let proxyContent = proxies.reduce(
     (sum, value) => (sum += getProxyContent(value)),
     ''
@@ -74,28 +85,18 @@ export const parseRules = content => {
 
 export function setProxy(content) {
   let code = '\n'
-  console.log(content)
   const result = parseRules(content)
   const defaultMethod =
-    localStorage.getItem('AWESOME_HOST_otherProxies') || 'SYSTEM'
+    localStorage.getItem('AWESOME_HOST_otherProxies') || 'DIRECT'
 
   let pacContent = `
   function FindProxyForURL(url, host) {
     if (shExpMatch(url, "http:*") || shExpMatch(url, "https:*")) {
-        if (isPlainHostName(host)) {
-            if (host == 'localhost') {
-                return "DIRECT";
-            } else {
-                ${result.hostContent}
-                else { return "${result.proxyContent} ${defaultMethod}"; }
-            }
-        } else {
-            ${result.hostContent}
-            else { return "${result.proxyContent} ${defaultMethod}"; }
-        }
-    } else {
-        return "SYSTEM";
+${result.hostContent}
+      return "${result.proxyContent ? result.proxyContent + ' ' + defaultMethod : defaultMethod}";
     }
+    
+    return "DIRECT";
   }`
   // let pacContent = `function FindProxyForURL(url, host) {
   //       if (shExpMatch(url, "http:*") || shExpMatch(url, "https:*")) {
@@ -132,14 +133,12 @@ export function setProxy(content) {
     clearProxy()
   }
 }
-export function clearProxy(cb) {
+export function clearProxy(cb?: () => void) {
   cb = cb || function () {}
   console.log('clear.')
-  if (typeof chrome.proxy === 'undefined') return false
-  chrome.proxy.settings.set({
-      value: { mode: 'system' },
-      scope: 'regular'
-    },
-    cb
-  )
+  if (typeof chrome.proxy === 'undefined') {
+    console.log("chrome.proxy is not supported")
+    return false
+  }
+  chrome.proxy.settings.clear({ scope: 'regular' }, cb)
 }
